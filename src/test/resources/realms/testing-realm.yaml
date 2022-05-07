@@ -1,0 +1,38 @@
+realm: testing
+enabled: true
+
+eventsListeners:
+  - "jboss-logging"
+  - "custom-eventlistener"
+
+clients:
+  - clientId: acme-client-legacy-app
+    protocol: openid-connect
+    name: Acme Legacy App
+    description: "Legacy App that can obtain tokens with Username + Password and ClientId via grant_type=password"
+    enabled: true
+    publicClient: true
+    standardFlowEnabled: false
+    directAccessGrantsEnabled: true
+    serviceAccountsEnabled: false
+    defaultClientScopes:
+      - "email"
+      - "profile"
+    optionalClientScopes:
+      - "phone"
+
+users:
+  - username: tester
+    email: tester@local
+    firstName: Theo
+    lastName: Tester
+    enabled: true
+    attributes:
+      locale: ["en"]
+      phoneNumber: ["+49178111222333"]
+      phoneNumberVerified: ["true"]
+    credentials:
+      - type: password
+        userLabel: initial
+        value: test
+        temporary: false
