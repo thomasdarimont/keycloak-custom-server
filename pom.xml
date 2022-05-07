@@ -60,6 +60,12 @@
             <!-- Exclude unused dependencies -->
 
             <exclusions>
+                <exclusion>
+                    <!-- CVE_MITIGATION: CVE-2020-36518 excluded since this includes an outdated version of jackson-databind that is affected by a CVE.-->
+                    <groupId>org.wildfly.security</groupId>
+                    <artifactId>wildfly-elytron</artifactId>
+                </exclusion>
+
                 <!-- Exclude unused support for: MySQL -->
                 <exclusion>
                     <groupId>mysql</groupId>
@@ -112,22 +118,22 @@
                     <groupId>io.quarkus</groupId>
                     <artifactId>quarkus-jdbc-mariadb-deployment</artifactId>
                 </exclusion>
-<!--                &lt;!&ndash; Exclude unused support for: H2; DOES NOT WORK BECAUSE OF BUILD &ndash;&gt;-->
 
-<!--                &lt;!&ndash; Note: by default keycloak uses the h2 database as database for auto-build.-->
-<!--                     To remove h2, one needs to configure another Database in src/main/resources/META-INF/keycloak.conf &ndash;&gt;-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.h2database</groupId>-->
-<!--                    <artifactId>h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>-->
-<!--                </exclusion>-->
+                <!-- Exclude unused support for: H2 -->
+                <!-- Note: by default keycloak uses the h2 database as database for auto-build.
+                     To remove h2, one needs to configure another Database in src/main/resources/META-INF/keycloak.conf -->
+                <exclusion>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -146,24 +152,12 @@
 
         <!-- Additional Quarkus Features: End -->
 
-        <dependency>
-            <groupId>org.wildfly.client</groupId>
-            <artifactId>wildfly-client-config</artifactId>
-            <version>1.0.1.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <!-- testing libraries -->
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.2</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -180,6 +174,21 @@
             <version>${testcontainers-keycloak.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <!-- Needed to properly use RestEasy JaxRS Client in integration tests. -->
+            <groupId>org.wildfly.client</groupId>
+            <artifactId>wildfly-client-config</artifactId>
+            <version>1.0.1.Final</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 
         <!-- Tooling -->
         <dependency>
@@ -216,6 +225,11 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>2.13.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.21</version>
             </dependency>
             <!-- CVE Patch overrides: End -->
         </dependencies>
@@ -394,7 +408,8 @@
                                 <assembly>
                                     <inline>
                                         <fileSet>
-                                            <directory>${project.build.directory}/keycloak-${keycloak.version}</directory>
+                                            <directory>${project.build.directory}/keycloak-${keycloak.version}
+                                            </directory>
                                             <outputDirectory>keycloak</outputDirectory>
                                         </fileSet>
                                     </inline>

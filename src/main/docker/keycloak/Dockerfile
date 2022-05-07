@@ -15,7 +15,7 @@ FROM registry.access.redhat.com/ubi8-minimal:8.5
 
 RUN microdnf update -y && \
     microdnf reinstall -y tzdata && \
-    microdnf install -y java-17-openjdk-headless &&  \
+    microdnf install -y java-17-openjdk-headless && \
     microdnf clean all && rm -rf /var/cache/yum/* && \
     echo "keycloak:x:0:root" >> /etc/group && \
     echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /etc/passwd && \

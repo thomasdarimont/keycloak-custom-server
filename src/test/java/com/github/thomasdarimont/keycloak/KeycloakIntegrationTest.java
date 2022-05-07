@@ -2,13 +2,9 @@ package com.github.thomasdarimont.keycloak;
 
 import com.github.thomasdarimont.keycloak.support.KeycloakEnvironment;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.keycloak.TokenVerifier;
-import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.admin.client.token.TokenService;
 import org.keycloak.representations.IDToken;
 import org.testcontainers.containers.output.ToStringConsumer;
 
