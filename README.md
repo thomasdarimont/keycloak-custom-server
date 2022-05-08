@@ -55,7 +55,9 @@ Before running the command below, ensure that the custom keycloak docker image w
 java bin/scanImage.java --verbose --image-name=thomasdarimont/custom-keycloakx:1.0.0-SNAPSHOT
 ```
 
-# Run the custom distribution directly
+# Run
+
+## Run the custom distribution directly
 
 The following example command shows how to run the custom Keycloak distribution against 
 a postgres instance accessible on `127.0.0.1`.
@@ -75,7 +77,7 @@ target/keycloak-18.0.0/bin/kc.sh \
    --db-password=keycloak
 ```
 
-# Run the docker image
+## Run the docker image
 
 The following example command shows how to run the custom docker image against 
 a postgres instance accessible on the docker host via `172.17.0.1` in this case.
