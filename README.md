@@ -30,6 +30,7 @@ mvn clean verify docker:build
 
 ## Build docker image with Zero (known) CVEs
 
+See https://github.com/thomasdarimont/keycloak-custom-server/tree/zero-cves or perform the the following steps yourself:
 - Uncomment the h2 exclusions from the dependency section in the the pom.xml file.
 - Uncomment the `db` setting in src/main/resources/META-INF/keycloak.conf and set an appropriate value, e.g. `postgres`.
 
