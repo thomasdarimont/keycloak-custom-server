@@ -122,18 +122,18 @@
                 <!-- Exclude unused support for: H2 -->
                 <!-- Note: by default keycloak uses the h2 database as database for auto-build.
                      To remove h2, one needs to configure another Database in src/main/resources/META-INF/keycloak.conf -->
-<!--                <exclusion>-->
-<!--                    <groupId>com.h2database</groupId>-->
-<!--                    <artifactId>h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>-->
-<!--                </exclusion>-->
+                <exclusion>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
