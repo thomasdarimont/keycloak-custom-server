@@ -3,10 +3,12 @@ Custom Keycloak Server
 
 Simple example for creating a custom Quarkus based Keycloak Distribution with 0 known CVEs.
 
-Features:
-- Unwanted Quarkus Extensions can be removed via maven dependency excludes
-- Libraries with known CVEs are updated to their latest patch levels
-- Docker base image swaped from ubi8-minimal to alpine to avoid CVEs in base image. 
+# Features
+- Create a custom Quarkus based Keycloak Distribution and Docker Image
+- Support for using your own extensions and themes
+- Support for removing unwanted Quarkus Extensions via maven dependency excludes
+- Support for latest patch levels for libraries with known CVEs
+- Support for secure Docker image based on alpine to avoid CVEs in base image. 
 
 An [example for a Image scan with aqasec/trivy shows](https://gist.github.com/thomasdarimont/efb1a1327a585517db5a047401852a88) that this project can produce 
 a custom Keycloak docker image with 0 known CVEs.
@@ -42,7 +44,7 @@ mvn clean verify docker:build -Ddocker.file=keycloak/Dockerfile.alpin
 
 ## Scan the image with Aquasec Trivy
 
-Ensure that the custom keycloak docker image was build successfuly.
+Before running the command below, ensure that the custom keycloak docker image was build successfuly.
 
 ```
 java bin/scanImage.java --verbose --image-name=thomasdarimont/custom-keycloakx:1.0.0-SNAPSHOT
