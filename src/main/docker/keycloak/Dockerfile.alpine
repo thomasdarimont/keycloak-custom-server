@@ -1,33 +1,31 @@
-FROM registry.access.redhat.com/ubi8-minimal:8.5 AS builder
+FROM alpine:3.15.4 as builder
 
-RUN microdnf update -y && \
-    microdnf install -y java-17-openjdk-headless && microdnf clean all && rm -rf /var/cache/yum/* && \
+RUN apk add binutils openjdk17-jdk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     echo "keycloak:x:0:root" >> /etc/group && \
     echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /etc/passwd
 
-COPY --chown=keycloak:keycloak maven/keycloak  /opt/keycloak
+COPY --chown=keycloak:keycloak maven/keycloak /opt/keycloak
 
 USER 1000
 
-RUN /opt/keycloak/bin/kc.sh build
+RUN /bin/sh /opt/keycloak/bin/kc.sh build
 
-FROM registry.access.redhat.com/ubi8-minimal:8.5
+FROM alpine:3.15.4
 
-RUN microdnf update -y && \
-    microdnf reinstall -y tzdata && \
-    microdnf install -y java-17-openjdk-headless && \
-    microdnf clean all && rm -rf /var/cache/yum/* && \
+RUN apk add binutils openjdk17-jdk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     echo "keycloak:x:0:root" >> /etc/group && \
-    echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /etc/passwd && \
+    echo "keycloak:x:1000:0:keycloak user:/opt/keycloak:/sbin/nologin" >> /etc/passwd
+
+RUN apk add tzdata bash --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime # set timezone
 
 COPY --from=builder --chown=1000:0 /opt/keycloak /opt/keycloak
 
 RUN echo "Add certificates to cacerts truststore" \
     && ls -l /opt/keycloak/conf/certs/* \
-    && cp /opt/keycloak/conf/certs/*.pem /etc/pki/ca-trust/source/anchors \
+    && cp /opt/keycloak/conf/certs/*.pem /usr/local/share/ca-certificates \
     && echo "Updating cacerts truststore..."\
-    && update-ca-trust \
+    && update-ca-certificates \
     && echo "Certificates added to cacerts truststore" \
     || echo "Could not import certificates"
 

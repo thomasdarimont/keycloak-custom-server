@@ -18,6 +18,9 @@
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
         <docker-maven-plugin.version>0.38.0</docker-maven-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
         <!-- Dependencies -->
         <keycloak.version>18.0.0</keycloak.version>
@@ -34,11 +37,8 @@
         <auto-service.version>1.0.1</auto-service.version>
 
         <!-- Docker -->
-        <docker-image>thomasdarimont/custom-keycloakx</docker-image>
-
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <docker.image>thomasdarimont/custom-keycloakx</docker.image>
+        <docker.file>keycloak/Dockerfile</docker.file>
     </properties>
 
     <dependencies>
@@ -122,18 +122,18 @@
                 <!-- Exclude unused support for: H2 -->
                 <!-- Note: by default keycloak uses the h2 database as database for auto-build.
                      To remove h2, one needs to configure another Database in src/main/resources/META-INF/keycloak.conf -->
-<!--                <exclusion>-->
-<!--                    <groupId>com.h2database</groupId>-->
-<!--                    <artifactId>h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>-->
-<!--                </exclusion>-->
+                <exclusion>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -395,15 +395,15 @@
 
                     <images>
                         <image>
-                            <name>${docker-image}</name>
+                            <name>${docker.image}</name>
                             <build>
                                 <tags>
                                     <tag>${project.version}</tag>
                                     <tag>${git.commit.id}</tag>
                                 </tags>
 
-                                <!-- src/main/docker/keycloak -->
-                                <dockerFileDir>keycloak</dockerFileDir>
+                                <!-- src/main/docker/keycloak/Dockerfile -->
+                                <dockerFile>${docker.file}</dockerFile>
 
                                 <assembly>
                                     <inline>
