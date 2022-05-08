@@ -35,13 +35,12 @@ mvn clean verify docker:build
 Checkout the [zero-cves Branch](https://github.com/thomasdarimont/keycloak-custom-server/tree/zero-cves) 
 ```
 git checkout zero-cves
-mvn clean verify docker:build -Ddocker.file=keycloak/Dockerfile.alpine
 ```
-
-or perform the following steps yourself:
+*or* perform the following steps yourself:
 - Uncomment the h2 exclusions from the dependency section in the the pom.xml file.
 - Uncomment the `db` setting in src/main/resources/META-INF/keycloak.conf and set an appropriate value, e.g. `postgres`.
 
+Then run the following command to build the image (defaults to `thomasdarimont/custom-keycloakx:1.0.0-SNAPSHOT`):
 ```
 mvn clean verify docker:build -Ddocker.file=keycloak/Dockerfile.alpine
 ```
