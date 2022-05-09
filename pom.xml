@@ -335,6 +335,7 @@
                                     <outputDirectory>target</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
+                            <!-- Optionally we could also remove the unused admin-client libraries ,**/bin/client/**-->
                             <excludes>**/lib/**</excludes>
                         </configuration>
                     </execution>
