@@ -139,16 +139,16 @@
 
         <!-- Additional Quarkus Features: Begin -->
 
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-logging-gelf</artifactId>-->
-<!--            <version>${quarkus.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-logging-gelf-deployment</artifactId>-->
-<!--            <version>${quarkus.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.quarkus</groupId>-->
+        <!--            <artifactId>quarkus-logging-gelf</artifactId>-->
+        <!--            <version>${quarkus.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.quarkus</groupId>-->
+        <!--            <artifactId>quarkus-logging-gelf-deployment</artifactId>-->
+        <!--            <version>${quarkus.version}</version>-->
+        <!--        </dependency>-->
 
         <!-- Additional Quarkus Features: End -->
 
@@ -202,7 +202,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <!-- Fix keycloak-admin-client (via keycloak-testcontainers) pulls in old resteasy client version -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
@@ -212,21 +211,54 @@
 
             <!-- CVE Patch overrides: Begin -->
             <dependency>
+                <!-- Found via docker scan
+                     Upgrade org.graalvm.sdk:graal-sdk@21.3.1 to org.graalvm.sdk:graal-sdk@21.3.2 to fix
+                     see: https://gist.github.com/thomasdarimont/bcd0fecf2db9f98e82e599ea353eb1dd -->
+                <groupId>org.graalvm.sdk</groupId>
+                <artifactId>graal-sdk</artifactId>
+                <version>21.3.2</version>
+            </dependency>
+
+            <dependency>
+                <!-- Found via docker scan
+                      introduced by org.keycloak:keycloak-admin-cli@18.0.0 > commons-codec:commons-codec@1.11 and 1 other path(s)
+                     see: https://gist.github.com/thomasdarimont/bcd0fecf2db9f98e82e599ea353eb1dd -->
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
+            </dependency>
+
+            <dependency>
+                <!-- Found via docker scan
+                 Upgrade io.netty:netty-common@4.1.73.Final to io.netty:netty-common@4.1.77.Final to fix
+               see: https://gist.github.com/thomasdarimont/bcd0fecf2db9f98e82e599ea353eb1dd -->
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>4.1.77.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <!-- Found via aquasec trivy -->
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
                 <version>1.4.19</version>
             </dependency>
             <dependency>
+                <!-- Found via aquasec trivy -->
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>42.3.5</version>
             </dependency>
             <dependency>
+                <!-- Found via aquasec trivy -->
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>2.13.2.2</version>
             </dependency>
             <dependency>
+                <!-- Found via aquasec trivy -->
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
                 <version>1.21</version>
