@@ -29,7 +29,7 @@ RUN echo "Add certificates to cacerts truststore" \
     && echo "Updating cacerts truststore..."\
     && update-ca-trust \
     && echo "Certificates added to cacerts truststore" \
-    || echo "Could not import certificates"
+    || (echo "Could not import certificates" && exit 1)
 
 # Note you can check if certs were added with the following commands
 # keytool -list -keystore /etc/pki/java/cacerts -storepass changeit |& head
