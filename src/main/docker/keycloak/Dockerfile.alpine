@@ -1,4 +1,4 @@
-FROM alpine:3.15.4 as builder
+FROM alpine:3.16.0 as builder
 
 RUN apk add binutils openjdk17-jdk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     echo "keycloak:x:0:root" >> /etc/group && \
@@ -10,7 +10,7 @@ USER 1000
 
 RUN /bin/sh /opt/keycloak/bin/kc.sh build
 
-FROM alpine:3.15.4
+FROM alpine:3.16.0
 
 RUN apk add binutils openjdk17-jdk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     echo "keycloak:x:0:root" >> /etc/group && \

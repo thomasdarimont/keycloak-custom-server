@@ -23,7 +23,7 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
         <!-- Dependencies -->
-        <keycloak.version>18.0.0</keycloak.version>
+        <keycloak.version>18.0.1</keycloak.version>
 
         <quarkus.version>2.7.5.Final</quarkus.version>
         <quarkus.native.builder-image>mutable-jar</quarkus.native.builder-image>
@@ -122,18 +122,18 @@
                 <!-- Exclude unused support for: H2 -->
                 <!-- Note: by default keycloak uses the h2 database as database for auto-build.
                      To remove h2, one needs to configure another Database in src/main/resources/META-INF/keycloak.conf -->
-<!--                <exclusion>-->
-<!--                    <groupId>com.h2database</groupId>-->
-<!--                    <artifactId>h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.quarkus</groupId>-->
-<!--                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>-->
-<!--                </exclusion>-->
+                <exclusion>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-jdbc-h2-deployment</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -229,6 +229,20 @@
             </dependency>
 
             <dependency>
+                <!-- Found via docker scan -->
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>1.70</version>
+            </dependency>
+
+            <dependency>
+                <!-- Found via docker scan -->
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.11.0</version>
+            </dependency>
+
+            <dependency>
                 <!-- Found via docker scan
                  Upgrade io.netty:netty-common@4.1.73.Final to io.netty:netty-common@4.1.77.Final to fix
                see: https://gist.github.com/thomasdarimont/bcd0fecf2db9f98e82e599ea353eb1dd -->
@@ -237,19 +251,6 @@
                 <version>4.1.77.Final</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <!-- Found via aquasec trivy -->
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>1.4.19</version>
-            </dependency>
-            <dependency>
-                <!-- Found via aquasec trivy -->
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>42.3.5</version>
             </dependency>
             <dependency>
                 <!-- Found via aquasec trivy -->
