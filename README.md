@@ -63,7 +63,7 @@ The following example command shows how to run the custom Keycloak distribution 
 a postgres instance accessible on `127.0.0.1`.
 
 ```
-target/keycloak-18.0.1/bin/kc.sh \
+target/keycloak-18.0.2/bin/kc.sh \
    start \
    --auto-build \
    --http-enabled=true \

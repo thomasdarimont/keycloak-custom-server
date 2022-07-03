@@ -23,7 +23,7 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
         <!-- Dependencies -->
-        <keycloak.version>18.0.1</keycloak.version>
+        <keycloak.version>18.0.2</keycloak.version>
 
         <quarkus.version>2.7.5.Final</quarkus.version>
         <quarkus.native.builder-image>mutable-jar</quarkus.native.builder-image>

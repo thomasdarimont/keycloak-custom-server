@@ -29,7 +29,7 @@ public class KeycloakEnvironment {
     private boolean runConfigCli = true;
 
     public void start() {
-        keycloak = new KeycloakContainer("quay.io/keycloak/keycloak:18.0.1");
+        keycloak = new KeycloakContainer("quay.io/keycloak/keycloak:18.0.2");
         keycloak.withProviderClassesFrom("target/classes");
         keycloak.withReuse(true);
         keycloak.withCreateContainerCmdModifier(cmd -> cmd.withName("keycloak-" + Long.toHexString(System.currentTimeMillis())));
