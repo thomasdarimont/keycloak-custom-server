@@ -219,6 +219,14 @@
             </dependency>
 
             <!-- CVE Patch overrides: Begin -->
+
+            <dependency>
+                <!-- see CVE-2022-42004 https://github.com/thomasdarimont/keycloak-custom-server/security/dependabot/10 -->
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.14.0-rc2</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
