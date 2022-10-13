@@ -219,14 +219,6 @@
             </dependency>
 
             <!-- CVE Patch overrides: Begin -->
-
-            <dependency>
-                <!-- see CVE-2022-42004 https://github.com/thomasdarimont/keycloak-custom-server/security/dependabot/10 -->
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.14.0-rc2</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
@@ -235,12 +227,13 @@
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>42.3.5</version>
+                <version>42.3.7</version>
             </dependency>
             <dependency>
+                <!-- see CVE-2022-42004 https://github.com/thomasdarimont/keycloak-custom-server/security/dependabot/10 -->
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.13.2.2</version>
+                <version>2.14.0-rc2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
