@@ -23,10 +23,12 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
         <!-- Dependencies -->
-        <keycloak.version>19.0.2</keycloak.version>
+        <keycloak.version>19.0.3</keycloak.version>
 
-        <quarkus.version>2.7.5.Final</quarkus.version>
+        <quarkus.version>2.7.6.Final</quarkus.version>
         <quarkus.native.builder-image>mutable-jar</quarkus.native.builder-image>
+
+        <quarkus.package.type>native</quarkus.package.type>
 
         <!-- Testing -->
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
@@ -49,6 +51,12 @@
             <artifactId>keycloak-quarkus-dist</artifactId>
             <version>${keycloak.version}</version>
             <type>zip</type>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+            <version>${quarkus.version}</version>
         </dependency>
 
         <dependency>
@@ -236,6 +244,15 @@
     </dependencyManagement>
 
     <profiles>
+
+        <profile>
+            <id>native</id>
+            <properties>
+                <quarkus.package.type>native</quarkus.package.type>
+                <quarkus.native.additional-build-args>--initialize-at-run-time=freemarker.ext.jython.JythonWrapper --allow-incomplete-classpath -H:ConfigurationFileDirectories=/home/tom/dev/repos/gh/thomasdarimont/keycloak-dev/keycloak-custom-server/graalvm</quarkus.native.additional-build-args>
+            </properties>
+        </profile>
+
         <profile>
             <id>with-integration-tests</id>
             <build>
@@ -283,7 +300,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

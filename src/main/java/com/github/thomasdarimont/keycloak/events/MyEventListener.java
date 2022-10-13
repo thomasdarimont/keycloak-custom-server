@@ -26,6 +26,7 @@ public class MyEventListener implements EventListenerProvider {
 
     @Override
     public void close() {
+        // NOOP
     }
 
     @AutoService(EventListenerProviderFactory.class)
@@ -45,14 +46,17 @@ public class MyEventListener implements EventListenerProvider {
 
         @Override
         public void init(Config.Scope config) {
+            // NOOP
         }
 
         @Override
         public void postInit(KeycloakSessionFactory factory) {
+            // NOOP
         }
 
         @Override
         public void close() {
+            // NOOP
         }
     }
 
