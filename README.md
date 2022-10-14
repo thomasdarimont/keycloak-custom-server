@@ -65,7 +65,6 @@ a postgres instance accessible on `127.0.0.1`.
 ```
 target/keycloak-*/bin/kc.sh \
    start \
-   --auto-build \
    --http-enabled=true \
    --http-relative-path=auth \
    --hostname-strict=false \

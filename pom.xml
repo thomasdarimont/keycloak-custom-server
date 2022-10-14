@@ -147,6 +147,18 @@
 
         <!-- Additional Quarkus Features: Begin -->
 
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-security</artifactId>
+            <version>${quarkus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-mutiny</artifactId>
+            <version>${quarkus.version}</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>io.quarkus</groupId>-->
 <!--            <artifactId>quarkus-logging-gelf</artifactId>-->
