@@ -30,6 +30,10 @@
 
         <quarkus.package.type>native</quarkus.package.type>
 
+        <!-- Needs update when quarkus version gets updated -->
+        <opentelemetry.version>1.9.1</opentelemetry.version>
+        <failureaccess.version>1.0.1</failureaccess.version>
+
         <!-- Testing -->
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
         <assertj-core.version>3.22.0</assertj-core.version>
@@ -159,6 +163,28 @@
             <version>${quarkus.version}</version>
         </dependency>
 
+        <!-- Opentelemetry dependencies -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-opentelemetry-deployment</artifactId>
+            <version>${quarkus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-opentelemetry-exporter-otlp-deployment</artifactId>
+            <version>${quarkus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-extension-trace-propagators</artifactId>
+            <version>${opentelemetry.version}</version>
+        </dependency>
+        <!-- Needed by opentelemetry, Keycloak bundles guava, but not this small extra library -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>failureaccess</artifactId>
+            <version>${failureaccess.version}</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>io.quarkus</groupId>-->
 <!--            <artifactId>quarkus-logging-gelf</artifactId>-->
