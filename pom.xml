@@ -23,17 +23,17 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
         <!-- Dependencies -->
-        <keycloak.version>19.0.3</keycloak.version>
+        <keycloak.version>20.0.3</keycloak.version>
 
-        <quarkus.version>2.7.6.Final</quarkus.version>
-        <quarkus.native.builder-image>mutable-jar</quarkus.native.builder-image>
+        <quarkus.version>2.13.7.Final</quarkus.version>
+        <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel-builder-image:22.3-java17</quarkus.native.builder-image>
 
         <quarkus.package.type>native</quarkus.package.type>
 
         <!-- Testing -->
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
         <assertj-core.version>3.22.0</assertj-core.version>
-        <testcontainers-keycloak.version>2.1.2</testcontainers-keycloak.version>
+        <testcontainers-keycloak.version>2.4.0</testcontainers-keycloak.version>
 
         <!-- Tooling -->
         <auto-service.version>1.0.1</auto-service.version>
@@ -159,6 +159,13 @@
             <version>${quarkus.version}</version>
         </dependency>
 
+        <dependency>
+            <!-- we need to downgrade liquibase to 4.8.0 for compatibility -->
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>4.8.0</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>io.quarkus</groupId>-->
 <!--            <artifactId>quarkus-logging-gelf</artifactId>-->
@@ -222,37 +229,53 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- CVE Patch overrides: Begin -->
+            <!-- CVE Patch overrides: End -->
 
-            <!-- Fix keycloak-admin-client (via keycloak-testcontainers) pulls in old resteasy client version -->
             <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-client</artifactId>
-                <version>4.7.5.Final</version>
+                <!-- use dependencies from quarkus bom -->
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
-            <!-- CVE Patch overrides: Begin -->
             <dependency>
+                <!-- pull up to match version used by Keycloak -->
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.10.0</version>
+            </dependency>
+
+
+            <dependency>
+                <!-- pull up to match version used by Keycloak -->
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.19</version>
+                <version>1.4.20</version>
             </dependency>
+
             <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>42.3.7</version>
+                <!-- pull up to match version used by Keycloak -->
+                <groupId>org.keycloak</groupId>
+                <artifactId>keycloak-admin-client</artifactId>
+                <version>${keycloak.version}</version>
             </dependency>
+
             <dependency>
-                <!-- see CVE-2022-42004 https://github.com/thomasdarimont/keycloak-custom-server/security/dependabot/10 -->
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.14.0-rc2</version>
+                <!-- pull up to match version used by Keycloak -->
+                <groupId>org.keycloak</groupId>
+                <artifactId>keycloak-core</artifactId>
+                <version>${keycloak.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>1.21</version>
+                <!-- pull up to match version used by Keycloak -->
+                <groupId>org.keycloak</groupId>
+                <artifactId>keycloak-common</artifactId>
+                <version>${keycloak.version}</version>
             </dependency>
-            <!-- CVE Patch overrides: End -->
         </dependencies>
     </dependencyManagement>
 

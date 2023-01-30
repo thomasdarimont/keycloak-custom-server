@@ -88,7 +88,6 @@ docker run --rm -it \
     -e KEYCLOAK_ADMIN_PASSWORD=keycloak \
     thomasdarimont/custom-keycloakx:1.0.0-SNAPSHOT \
     start \
-   --auto-build \
    --http-enabled=true \
    --http-relative-path=auth \
    --hostname-strict=false \

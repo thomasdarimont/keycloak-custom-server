@@ -15,7 +15,7 @@ class scanImage {
 
     static final String TRIVY_VERSION_OPT = "--trivy-version";
     static final String TRIVY_VERSION_ENV = "TRIVY_VERSION";
-    static final String TRIVY_VERSION_DEFAULT = "0.27.1";
+    static final String TRIVY_VERSION_DEFAULT = "0.36.1";
 
     static final String VERBOSE_CMD = "--verbose";
 
